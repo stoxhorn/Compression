@@ -1,3 +1,5 @@
+package compression;
+
 import java.io.*;
 import java.util.*;
 
@@ -5,9 +7,10 @@ public class Main {
 
     public static void main(String[] args) {
         try {
-
-
-            FileInputStream fin = new FileInputStream(args[0]);
+            // String for testing, remember to take index 0 from arguments when finished
+            String testStr = "C:\\Users\\Stoxhorn\\Desktop\\CurrentProjects\\Compression\\Test.txt";
+            
+            FileInputStream fin = new FileInputStream(testStr);
 			int x = 0;
 			int[] list = new int[256];
             while((x = fin.read()) != -1){ 
@@ -16,12 +19,28 @@ public class Main {
 				// Tjek resultat med https://www.asciitable.com/
 
             }
-			System.out.println(Arrays.toString(list));
+            ArrayList<String> arList = new ArrayList();
+            int i = 0;
+            String tmp;
+            for(int str : list)
+            {
+                tmp = String.valueOf(i);
+                if(str == 0)
+                {
+                }
+                else
+                {
+                    tmp += ": ";
+                    tmp += String.valueOf(str);
+                    arList.add(tmp);
+                }
+                i++;
+            }
+            System.out.println(Arrays.toString(arList.toArray()));
 			
 			
 
-        } catch (Exception e) {
-			System.out.println("asd");
+        } catch (IOException e) {
             System.out.println(e);
 
         }
