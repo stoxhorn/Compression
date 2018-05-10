@@ -13,8 +13,8 @@ import java.util.ArrayList;
 
 public class PQHeap implements PQ {
     //Field
-    private int MaxElms;
-    private ArrayList<Element> PrioArray;
+    private final int MaxElms;
+    private final ArrayList<Element> PrioArray;
     private int ListSize;
     
     // Constructor
@@ -40,7 +40,7 @@ public class PQHeap implements PQ {
         ListSize++;
         int i = ListSize;
         this.PrioArray.add(key);      
-        while( i > 0 && this.PrioArray.get(Parent(i)).key  >  this.PrioArray.get(i).key){            
+        while( i > 0 && this.PrioArray.get(Parent(i)).freq  >  this.PrioArray.get(i).freq){            
             Element tmp = this.PrioArray.get(i);
             this.PrioArray.set(i, this.PrioArray.get(Parent(i)));
             this.PrioArray.set(Parent(i), tmp);
@@ -67,7 +67,7 @@ private int right(int i){
 @Override
 public Element extractMin(){
     if(this.ListSize < 0){
-        System.err.println("Heap Underflow");
+        return null;
     }
     Element min = this.PrioArray.get(0);
     this.PrioArray.set(0, this.PrioArray.get(this.ListSize));
@@ -89,12 +89,12 @@ private void minHeapify(int i){
 
     
     int smallest;
-    if (l <= this.ListSize && this.PrioArray.get(l).key < this.PrioArray.get(i).key){    
+    if (l <= this.ListSize && this.PrioArray.get(l).freq < this.PrioArray.get(i).freq){    
         smallest = l;
     } else {
         smallest = i;
     }
-    if (r <= this.ListSize && this.PrioArray.get(r).key < this.PrioArray.get(smallest).key){
+    if (r <= this.ListSize && this.PrioArray.get(r).freq < this.PrioArray.get(smallest).freq){
         smallest = r;
     }
     if (smallest != i){

@@ -11,11 +11,24 @@ package compression;
  */
 public class Element {
 
-    public int key;
+    public int freq;
     public Object data;
 
     public Element(int i, Object o){
-	this.key = i;
+	this.freq = i;
 	this.data = o;
     }
+    
+    public int getFreq()
+    {
+        int tmp = freq;
+        return tmp;
+    }
+    
+    public Object getObj()
+    {
+        Object tmp = data;
+        return tmp;
+    }
+    
 }

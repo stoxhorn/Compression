@@ -24,7 +24,7 @@ public class Heapsort {
 	    n++;
        }
 	while (n > 0){
-	    System.out.println(pq.extractMin().key);
+	    System.out.println(pq.extractMin().freq);
 	    n--;
 	}
    }

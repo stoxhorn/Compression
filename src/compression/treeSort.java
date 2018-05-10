@@ -61,7 +61,7 @@ public class treeSort {
                     //{
                     
                         // Create a new node with a key of the given input, and insert into tree
-                        Node tmpNode = new Node(key);
+                        HuffNode tmpNode = new HuffNode(key);
                         inputTree.insert(tmpNode);   
                         
                         
