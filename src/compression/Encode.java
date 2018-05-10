@@ -28,16 +28,18 @@ public class Encode {
     {
         list = getFrq(str);
         
-        printFreq(list);
+        //printFreq(list);
         
         PQHeap heap = new PQHeap(256);
         
         int i = 0;
         for(int x : list)
         {
-            heap.insert(new Element(x, i));
+            heap.insert(new Element(x, new Object()));
             i++;
         }
+        
+        HuffTree huff = new HuffTree(heap);
         
         // for loop extracting min from PQHeap every loop, adding to HuffTree
         // Additions need a new Node obejct
@@ -57,7 +59,7 @@ public class Encode {
             while((x = fin.read()) != -1){ 
                 
                 list[x]++;
-                System.out.println(x);
+                //System.out.println(x);
                 // Tjek resultat med https://www.asciitable.com/
 
             }
@@ -107,5 +109,6 @@ public class Encode {
         
         
     }
+
 }
 

@@ -9,18 +9,15 @@ package compression;
  *
  * @author Stoxhorn
  */
-public class Element {
+public class TreeElement {
 
     public int freq;
-    public Object data;
-    private Object object;
+    public BotTree tree;
 
-    Element(int i, Object o){
+    public TreeElement(int i, BotTree o){
 	this.freq = i;
-	this.data = o;
+	this.tree = o;
     }
-
-
     
     public int getFreq()
     {
@@ -28,9 +25,9 @@ public class Element {
         return tmp;
     }
     
-    public Object getData()
+    public BotTree getTree()
     {
-        Object tmp = data;
+        BotTree tmp = tree;
         return tmp;
     }
     

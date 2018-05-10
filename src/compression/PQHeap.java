@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class PQHeap implements PQ {
     //Field
     private final int MaxElms;
-    private final ArrayList<Element> PrioArray;
+    private final ArrayList<TreeElement> PrioArray;
     private int ListSize;
     
     // Constructor
@@ -30,18 +30,18 @@ public class PQHeap implements PQ {
     }
 
 
-    private Element heapMinimum(){
+    private TreeElement heapMinimum(){
         return this.PrioArray.get(0);
     }
 
     
     @Override
-    public void insert(Element key){
+    public void insert(TreeElement key){
         ListSize++;
         int i = ListSize;
         this.PrioArray.add(key);      
         while( i > 0 && this.PrioArray.get(Parent(i)).freq  >  this.PrioArray.get(i).freq){            
-            Element tmp = this.PrioArray.get(i);
+            TreeElement tmp = this.PrioArray.get(i);
             this.PrioArray.set(i, this.PrioArray.get(Parent(i)));
             this.PrioArray.set(Parent(i), tmp);
             // Den skal blive ved med at tjekke, fordi den nye forældre kan også være "svagere".
@@ -65,11 +65,11 @@ public class PQHeap implements PQ {
 
 
     @Override
-    public Element extractMin(){
+    public TreeElement extractMin(){
         if(this.ListSize < 0){
             return null;
         }
-        Element min = this.PrioArray.get(0);
+        TreeElement min = this.PrioArray.get(0);
         this.PrioArray.set(0, this.PrioArray.get(this.ListSize));
         this.ListSize--;
         minHeapify(0);
@@ -77,8 +77,8 @@ public class PQHeap implements PQ {
     }
 
     private void exchange(int a, int b){
-        Element aa = this.PrioArray.get(a);
-        Element bb = this.PrioArray.get(b);
+        TreeElement aa = this.PrioArray.get(a);
+        TreeElement bb = this.PrioArray.get(b);
         this.PrioArray.set(a, bb);
         this.PrioArray.set(b, aa);
     }

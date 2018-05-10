@@ -37,20 +37,23 @@ public class HuffTree {
     public void addElements()
     {
         // Retrieve the first input
-        Element input = inputList.extractMin();
+        TreeElement input = inputList.extractMin();
+        Trees.insert(new TreeElement(input.getFreq(),new BotTree(new HuffNode(input))));
+        HighFreq = input.getFreq();
+        
         while(input != null)
         {
             // If input frequency is lower than highest frequency
             if(input.getFreq() < HighFreq)
             {
                 // add to trees as new tree
-                Trees.insert(new Element(new BotTree(new HuffNode(input)), input.getFreq()));
+                Trees.insert(new TreeElement(input.getFreq(),new BotTree(new HuffNode(input))));
             }
             else if(input.getFreq() > HighFreq)
             {
                 unify(input.getFreq());
                 // add to trees as new tree
-                Trees.insert(new Element(new BotTree(new HuffNode(input)), input.getFreq()));
+                Trees.insert(new TreeElement(input.getFreq(),new BotTree(new HuffNode(input))));
             }
             input = inputList.extractMin();
         }
@@ -65,17 +68,18 @@ public class HuffTree {
      */
     private void unify(int checker)
     {
-        if(Trees.getSize() == 1)
+        if(Trees.getSize() == 0)
         {
         }
         else
         {
-            Element el1 = Trees.extractMin();
-            Element el2 = Trees.extractMin();
+            TreeElement el1 = Trees.extractMin();
+            TreeElement el2 = Trees.extractMin();
 
             BotTree newTree;
-            newTree = new BotTree((BotTree) el1.getData(), (BotTree) el2.getData());
-            Trees.insert(new Element(newTree.getFreq(), newTree));
+
+            newTree = new BotTree(el1.getData(), el2.getData());
+            Trees.insert(new TreeElement(newTree.getFreq(), newTree));
 
             if(newTree.getFreq() > checker)
             {

@@ -47,6 +47,7 @@ public class BotTree {
         
         if(node1.getFreq() < node2.getFreq())
         {
+            System.out.println(node1);
             rootNode.setLchild(node1);
             rootNode.setRchild(node2);
         }
