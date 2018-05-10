@@ -1,5 +1,5 @@
 
-import compression.Element;
+package compression;
 
 /**
  * @author Rasmus Bartholin og Mads Mikael Keinicke
@@ -20,6 +20,16 @@ public class HuffNode{
     private HuffNode lchild = null;
     private HuffNode parent = null;
   
+    /**
+     * Constructor, takes an int, that is used as freq for Node
+     * 
+     * @param freq
+     */
+    public HuffNode(int freq){
+        this.freq = freq;
+        this.data = null;
+    }
+    
     /**
      * Constructor, takes an int, that is used as freq for Node
      * 
