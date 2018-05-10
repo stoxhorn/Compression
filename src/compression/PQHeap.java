@@ -54,55 +54,61 @@ public class PQHeap implements PQ {
 
 
 
-private int left(int i){
-  return 2*i;
-}
-
-private int right(int i){
-  return 2*i + 1;
-}
-  
-
-
-@Override
-public Element extractMin(){
-    if(this.ListSize < 0){
-        return null;
+    private int left(int i){
+      return 2*i;
     }
-    Element min = this.PrioArray.get(0);
-    this.PrioArray.set(0, this.PrioArray.get(this.ListSize));
-    this.ListSize--;
-    minHeapify(0);
-    return min;
-}
 
-private void exchange(int a, int b){
-    Element aa = this.PrioArray.get(a);
-    Element bb = this.PrioArray.get(b);
-    this.PrioArray.set(a, bb);
-    this.PrioArray.set(b, aa);
-}
+    private int right(int i){
+      return 2*i + 1;
+    }
 
-private void minHeapify(int i){
-    int l = left(i);
-    int r = right(i);
 
-    
-    int smallest;
-    if (l <= this.ListSize && this.PrioArray.get(l).freq < this.PrioArray.get(i).freq){    
-        smallest = l;
-    } else {
-        smallest = i;
+
+    @Override
+    public Element extractMin(){
+        if(this.ListSize < 0){
+            return null;
+        }
+        Element min = this.PrioArray.get(0);
+        this.PrioArray.set(0, this.PrioArray.get(this.ListSize));
+        this.ListSize--;
+        minHeapify(0);
+        return min;
     }
-    if (r <= this.ListSize && this.PrioArray.get(r).freq < this.PrioArray.get(smallest).freq){
-        smallest = r;
+
+    private void exchange(int a, int b){
+        Element aa = this.PrioArray.get(a);
+        Element bb = this.PrioArray.get(b);
+        this.PrioArray.set(a, bb);
+        this.PrioArray.set(b, aa);
     }
-    if (smallest != i){
-        exchange(i, smallest);
-        minHeapify(smallest);  			
+
+    private void minHeapify(int i){
+        int l = left(i);
+        int r = right(i);
+
+
+        int smallest;
+        if (l <= this.ListSize && this.PrioArray.get(l).freq < this.PrioArray.get(i).freq){    
+            smallest = l;
+        } else {
+            smallest = i;
+        }
+        if (r <= this.ListSize && this.PrioArray.get(r).freq < this.PrioArray.get(smallest).freq){
+            smallest = r;
+        }
+        if (smallest != i){
+            exchange(i, smallest);
+            minHeapify(smallest);  			
+        }
+
     }
-  
-}
+
+    public int getSize()
+    {
+        int tmp = this.ListSize;
+        return tmp;
+    }
   
 
 }

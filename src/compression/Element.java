@@ -25,7 +25,7 @@ public class Element {
         return tmp;
     }
     
-    public Object getObj()
+    public Object getData()
     {
         Object tmp = data;
         return tmp;

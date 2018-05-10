@@ -19,6 +19,8 @@ public class BotTree {
 
     // A variable that is used by two methods to know the iteration
         private int cursor;
+    private BotTree Tree1;
+    private BotTree Tree2;
     
     
     /**
@@ -33,10 +35,14 @@ public class BotTree {
         
     /**
      * Constructor that creates an empty tree
-     * @param node1
-     * @param node2
+     * @param Tree1
+     * @param Tree2
      */
-    public BotTree(HuffNode node1, HuffNode node2){
+    public BotTree(BotTree Tree1, BotTree Tree2){
+        HuffNode node1 = Tree1.getRoot();
+        
+        HuffNode node2 = Tree2.getRoot();
+        
         int freq = node1.getFreq() + node2.getFreq();
         
         if(node1.getFreq() < node2.getFreq())
@@ -52,12 +58,19 @@ public class BotTree {
         rootNode = new HuffNode(freq);
         size = 0;
         cursor = 0;
+        this.Tree1 = Tree1;
+        this.Tree2 = Tree2;
     }
     
     public int getFreq()
     {
         int tmp = rootNode.getFreq();
         return tmp;
+    }
+    
+    public HuffNode getRoot()
+    {
+        return rootNode;
     }
     
 }
