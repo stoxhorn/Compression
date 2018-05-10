@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class PQHeap implements PQ {
     //Field
     private final int MaxElms;
-    private final ArrayList<TreeElement> PrioArray;
+    private final ArrayList<Element> PrioArray;
     private int ListSize;
     
     // Constructor
@@ -30,18 +30,19 @@ public class PQHeap implements PQ {
     }
 
 
-    private TreeElement heapMinimum(){
+    private Element heapMinimum(){
         return this.PrioArray.get(0);
     }
 
     
     @Override
-    public void insert(TreeElement key){
+    public void insert(Element key){
+        System.out.println("inserted Frequency: " + key.getFreq());
         ListSize++;
         int i = ListSize;
         this.PrioArray.add(key);      
         while( i > 0 && this.PrioArray.get(Parent(i)).freq  >  this.PrioArray.get(i).freq){            
-            TreeElement tmp = this.PrioArray.get(i);
+            Element tmp = this.PrioArray.get(i);
             this.PrioArray.set(i, this.PrioArray.get(Parent(i)));
             this.PrioArray.set(Parent(i), tmp);
             // Den skal blive ved med at tjekke, fordi den nye forældre kan også være "svagere".
@@ -65,20 +66,22 @@ public class PQHeap implements PQ {
 
 
     @Override
-    public TreeElement extractMin(){
+    public Element extractMin(){
         if(this.ListSize < 0){
             return null;
         }
-        TreeElement min = this.PrioArray.get(0);
+        System.out.println("from this: " + this.PrioArray.get(0).getFreq() + " will be ");
+        Element min = this.PrioArray.get(0);
         this.PrioArray.set(0, this.PrioArray.get(this.ListSize));
         this.ListSize--;
         minHeapify(0);
+        System.out.println("extracting min with freq: " + min.getFreq());
         return min;
     }
 
     private void exchange(int a, int b){
-        TreeElement aa = this.PrioArray.get(a);
-        TreeElement bb = this.PrioArray.get(b);
+        Element aa = this.PrioArray.get(a);
+        Element bb = this.PrioArray.get(b);
         this.PrioArray.set(a, bb);
         this.PrioArray.set(b, aa);
     }
@@ -106,7 +109,7 @@ public class PQHeap implements PQ {
 
     public int getSize()
     {
-        int tmp = this.ListSize;
+        int tmp = this.ListSize+1;
         return tmp;
     }
   

@@ -13,10 +13,13 @@ public class Element {
 
     public int freq;
     public Object data;
-    private Object object;
+    
 
     Element(int i, Object o){
+        
+        
 	this.freq = i;
+        System.out.println("new element with frq: " + freq);
 	this.data = o;
     }
 

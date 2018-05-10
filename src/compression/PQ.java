@@ -10,6 +10,6 @@ package compression;
  * @author Stoxhorn
  */
 public interface PQ {
-    public TreeElement extractMin();
-    public void insert(TreeElement e);
+    public Element extractMin();
+    public void insert(Element e);
 }

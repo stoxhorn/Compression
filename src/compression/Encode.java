@@ -28,7 +28,7 @@ public class Encode {
     {
         list = getFrq(str);
         
-        //printFreq(list);
+        
         
         PQHeap heap = new PQHeap(256);
         
@@ -40,7 +40,7 @@ public class Encode {
         }
         
         HuffTree huff = new HuffTree(heap);
-        
+        printFreq(list);
         // for loop extracting min from PQHeap every loop, adding to HuffTree
         // Additions need a new Node obejct
         

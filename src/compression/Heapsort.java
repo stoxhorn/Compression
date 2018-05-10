@@ -20,7 +20,7 @@ public class Heapsort {
 	int n = 0;
 	Scanner sc = new Scanner(System.in);
 	while (sc.hasNextInt()) {
-	    pq.insert(new TreeElement(sc.nextInt(),null));
+	    pq.insert(new Element(sc.nextInt(),null));
 	    n++;
        }
 	while (n > 0){

@@ -12,7 +12,7 @@ public class HuffNode{
 
 // The freq of the HuffNode
     private final int freq;
-    private final TreeElement data;
+    private final Element data;
     
     
 // Nodes representing potential related Nodes    
@@ -35,9 +35,12 @@ public class HuffNode{
      * 
      * @param data
      */
-    public HuffNode(TreeElement data){
+    public HuffNode(Element data){
+        
+        
         this.freq = data.getFreq();
         this.data = data;
+        System.out.println("new HuffNode with frequence of: " + freq);
     }
 
     /**
@@ -103,6 +106,13 @@ public class HuffNode{
     public void setParent(HuffNode newNode){
         this.parent = newNode;
     }
+    
+    public Element getEl()
+    {
+        Element tmp = data;
+        return tmp;
+    }
+    
 }
 
 
