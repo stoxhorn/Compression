@@ -37,7 +37,7 @@ public class PQHeap implements PQ {
     
     @Override
     public void insert(Element key){
-        System.out.println("inserted Frequency: " + key.getFreq());
+        
         ListSize++;
         int i = ListSize;
         this.PrioArray.add(key);      
@@ -56,11 +56,11 @@ public class PQHeap implements PQ {
 
 
     private int left(int i){
-      return 2*i;
+      return 2*i + 1;
     }
 
     private int right(int i){
-      return 2*i + 1;
+      return 2*i + 2;
     }
 
 
@@ -70,12 +70,12 @@ public class PQHeap implements PQ {
         if(this.ListSize < 0){
             return null;
         }
-        System.out.println("from this: " + this.PrioArray.get(0).getFreq() + " will be ");
+        
         Element min = this.PrioArray.get(0);
         this.PrioArray.set(0, this.PrioArray.get(this.ListSize));
         this.ListSize--;
         minHeapify(0);
-        System.out.println("extracting min with freq: " + min.getFreq());
+        
         return min;
     }
 
