@@ -15,9 +15,7 @@ import java.util.Arrays;
  * @author Stoxhorn
  */
 public class Encode {
-    
     int[] list;
-    
     String str;
     
     /**
@@ -46,6 +44,11 @@ public class Encode {
         
     }
     
+    /**Method that gives the frequency of the different strings in a file. 
+     * 
+     * @param Str
+     * @return 
+     */
     private static int[] getFrq(String Str)
     {
         try {

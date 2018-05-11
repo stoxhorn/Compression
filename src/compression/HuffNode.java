@@ -31,7 +31,7 @@ public class HuffNode{
     }
     
     /**
-     * Constructor, takes an int, that is used as freq for Node
+     * Constructor, takes an Elemet as input.
      * 
      * @param data
      */

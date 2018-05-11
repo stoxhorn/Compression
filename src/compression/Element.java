@@ -14,7 +14,13 @@ public class Element {
     public int freq;
     public Object data;
     
-
+    
+    /**Construktor for element, takes a integer and a object as parameters.
+     * 
+     * @param i
+     * @param o 
+     */
+    
     Element(int i, Object o){
         
         
