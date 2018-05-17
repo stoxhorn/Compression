@@ -30,13 +30,27 @@ public class PQHeap implements PQ {
     }
 
 
-    private Element heapMinimum(){
+    private Element heapMinimum(){ // Denne kunne også bare gøres public?
         return this.PrioArray.get(0);
     }
 
     
     @Override
     public void insert(Element key){
+        
+        ListSize++;
+        int i = ListSize;
+        this.PrioArray.add(key);      
+        while( i > 0 && this.PrioArray.get(Parent(i)).freq  >  this.PrioArray.get(i).freq){            
+            Element tmp = this.PrioArray.get(i);
+            this.PrioArray.set(i, this.PrioArray.get(Parent(i)));
+            this.PrioArray.set(Parent(i), tmp);
+            // Den skal blive ved med at tjekke, fordi den nye forældre kan også være "svagere".
+            i = Parent(i);
+        }
+
+    }
+        public void insert(Element key, Element data){
         
         ListSize++;
         int i = ListSize;
@@ -76,6 +90,13 @@ public class PQHeap implements PQ {
         this.ListSize--;
         minHeapify(0);
         
+        return min;
+    }
+    public int lookMin(){
+        if(this.ListSize < 0){
+            return Integer.MAX_VALUE; // I want the tree to be ignored if there are no trees in the heap. 
+        }
+        int min = this.PrioArray.get(0).freq;
         return min;
     }
 

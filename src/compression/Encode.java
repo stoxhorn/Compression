@@ -37,7 +37,8 @@ public class Encode {
             i++;
         }
         
-        HuffTree huff = new HuffTree(heap);
+        //HuffTree huff = new HuffTree(heap);
+        TreeNewTry huff = new TreeNewTry(heap);
         printFreq(list);
         // for loop extracting min from PQHeap every loop, adding to HuffTree
         // Additions need a new Node obejct

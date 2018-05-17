@@ -12,34 +12,51 @@ package compression;
 public class Element {
 
     public int freq;
-    public Object data;
-    
-    
-    /**Construktor for element, takes a integer and a object as parameters.
-     * 
+    public Element data;
+    public Element rchild = null;
+    public Element lchild = null;
+    public Element parent = null;
+
+    /**
+     * Construktor for element, takes a integer and a object as parameters.
+     *
      * @param i
-     * @param o 
+     * @param o
      */
-    
-    Element(int i, Object o){
-        
-        
-	this.freq = i;
-	this.data = o;
+    Element(int i, Element o) {
+
+        this.freq = i;
+        this.data = o;
     }
 
+    Element() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
+    public void setRChild(Element rchild) {
+        this.rchild = rchild;
+    }
+
+    public void setLChild(Element lchild) {
+        this.lchild = lchild;
+    }
+
+    public void setParent(Element parent) {
+        this.parent = parent;
+    }
     
-    public int getFreq()
-    {
+    public void setFreq(int freq){
+        this.freq = freq;
+    }
+
+    public int getFreq() {
         int tmp = freq;
         return tmp;
     }
-    
-    public Object getData()
-    {
+
+    public Object getData() {
         Object tmp = data;
         return tmp;
     }
-    
+
 }

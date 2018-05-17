@@ -8,11 +8,11 @@ package compression;
  */
 public class HuffNode{
 
-// Field
+// Fields
 
 // The freq of the HuffNode
-    private final int freq;
-    private final Element data;
+    private int freq;
+    private final Object data;
     
     
 // Nodes representing potential related Nodes    
@@ -41,6 +41,15 @@ public class HuffNode{
         this.freq = data.getFreq();
         this.data = data;
         System.out.println("new HuffNode with frequence of: " + freq);
+    }
+    
+    public HuffNode(int freq, Object data){
+        this.data = data;
+        this.freq = freq; 
+    }
+    public HuffNode(){
+        freq = 0;
+        data = null;
     }
 
     /**
@@ -106,12 +115,15 @@ public class HuffNode{
     public void setParent(HuffNode newNode){
         this.parent = newNode;
     }
-    
-    public Element getEl()
-    {
-        Element tmp = data;
-        return tmp;
+    public void setfreq(int freq){
+        this.freq = freq;
     }
+    
+//    public Element getEl()
+//    {
+//        Element tmp = data;
+//        return tmp;
+//    }
     
 }
 
