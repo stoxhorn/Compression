@@ -52,7 +52,14 @@ public class PQHeap implements PQ {
     }
 
 
-
+    public void printHeap()
+    {
+        for(Element x : PrioArray)
+        {
+            System.out.print(x.getFreq() + " ");
+        }
+        System.out.println();
+    }
 
 
     private int left(int i){
@@ -70,13 +77,22 @@ public class PQHeap implements PQ {
         if(this.ListSize < 0){
             return null;
         }
+        else{
+            
+            Element min = this.PrioArray.get(0);
+            //System.out.println("Extracing this:");
+            //System.out.println(min.getFreq());
+            this.PrioArray.set(0, this.PrioArray.get(this.ListSize));
+            this.ListSize--;
+            PrioArray.remove(PrioArray.size()-1);
+            minHeapify(0);
+            //System.out.println("List size = " + ListSize);
+            //System.out.println("New smallest number");
+            //Element tmp = PrioArray.get(0);
+            //System.out.println(tmp.getFreq());
+            return min;
+        }
         
-        Element min = this.PrioArray.get(0);
-        this.PrioArray.set(0, this.PrioArray.get(this.ListSize));
-        this.ListSize--;
-        minHeapify(0);
-        
-        return min;
     }
 
     private void exchange(int a, int b){
@@ -89,8 +105,7 @@ public class PQHeap implements PQ {
     private void minHeapify(int i){
         int l = left(i);
         int r = right(i);
-
-
+        
         int smallest;
         if (l <= this.ListSize && this.PrioArray.get(l).freq < this.PrioArray.get(i).freq){    
             smallest = l;

@@ -11,111 +11,89 @@ package compression;
  */
 public class HuffTree {
     
-    // PQHeap containing Trees, with the first tree being the one with the lowest frequency rootnode
-    private PQHeap Trees;
-    
-    private int HighFreq;
-    
-    private PQHeap inputList;
 
-    public HuffTree(PQHeap newInput) {
-        inputList = newInput;
-        
-        Trees = new PQHeap(256); 
-        this.HighFreq = -1;
-        
-        addElements();
-        
-        
-        /*
-        BotTree tmp  = (BotTree) Trees.extractMin().getData();
-        tmp.printTree(tmp.getRoot());
-*/
+    public HuffTree() {
         
     }
     
-    
-    
-    
-    
-    
-    // if inputnode lower than highest tree, add to PQHeap Trees, as a new BotTree
-    public void addElements()
+    public Element HuffUnify(PQHeap heap)
     {
-        // Retrieve the first input
-        Element input = inputList.extractMin();
-        Trees.insert(new Element(input.getFreq(),new BotTree(new HuffNode(input))));
-        HighFreq = input.getFreq();
-        input = inputList.extractMin();
-        while(input != null)
+        int n = heap.getSize();
+        PQHeap q = heap;
+        for(int i = 1; i < n; i++)
         {
-            // If input frequency is lower than highest frequency
-            if(input.getFreq() < HighFreq+1)
-            {
-                // add to trees as new tree
-                Trees.insert(new Element(input.getFreq(),new BotTree(new HuffNode(input))));
-                HighFreq = input.getFreq();
-            }
-            else if(input.getFreq() > HighFreq)
-            {
-                
-                
-                unify(input.getFreq());
-                
-                Trees.insert(new Element(input.getFreq(), new BotTree(new HuffNode(input)))); 
-                
-                
-                // add to trees as new tree
-                HighFreq = input.getFreq();
-                
-            }
             
-            input = inputList.extractMin();
+            HuffNode z = new HuffNode();
+            HuffNode x = new HuffNode(q.extractMin());
+            z.setLchild(x);
+            HuffNode y = new HuffNode(q.extractMin());
+            z.setRchild(y);
+            
+            z.setFreq(x.getFreq() + y.getFreq());
+            //System.out.println(x.getFreq() + y.getFreq());
+            //System.out.println(z.getFreq());
+            q.insert(new Element(z.getFreq(), z));
+            q.printHeap();
+            
         }
+        //System.out.println(q.getSize());
+        return q.extractMin();
+    }
+    
+    
+    /*
+    Pseudo-kode for Huffmantree
+    HUFFMAN(C)
+    n = |C|
+    Q = C
+    for i = 1 to n-1
+        allocate a new node z
+        z.left = x = EXTRACT-MIN(Q)
+        z.rigth = y = EXTRACT-MIN(Q)
+        z.freq = x.freq + y.freq
+        INSERT(Q,z)
+    return EXTRACT-MIN(Q)
+    */
+        
+    
+    
+    
 
-        unify(0);
-        
-    }
-    
-    
-    /**
-     * Recursive method that unifies until the highest frequency is lower than checker
-     * 
-     * @param checker 
-     */
-    private void unify(int checker)
-    {
-        
-        if(Trees.getSize() == 1)
-        {
-            
-        }
-        else
-        {
-            Element el1 = Trees.extractMin();
-            Element el2 = Trees.extractMin();
-            
-            BotTree newTree;
-            
-            newTree = new BotTree((BotTree) el1.getData(),(BotTree) el2.getData());
-            Trees.insert(new Element(newTree.getFreq(), newTree));
-            
-            
-            
-            
-            if(newTree.getFreq() > checker)
-            {
-                // Stop recursion
-                HighFreq = newTree.getFreq();
-            }
-            else
-            {
-                // Recursive call
-                unify(checker);
-            }
-        }
-        
-        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
     
     
@@ -124,4 +102,4 @@ public class HuffTree {
     
     
     
-}
+

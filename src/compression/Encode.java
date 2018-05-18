@@ -37,7 +37,15 @@ public class Encode {
             i++;
         }
         
-        HuffTree huff = new HuffTree(heap);
+        HuffTree huff = new HuffTree();
+        Element tmp = huff.HuffUnify(heap);
+        System.out.println(tmp);
+        System.out.println(tmp.getFreq());
+        
+        
+        
+        
+        
         printFreq(list);
         // for loop extracting min from PQHeap every loop, adding to HuffTree
         // Additions need a new Node obejct

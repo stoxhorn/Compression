@@ -11,8 +11,8 @@ public class HuffNode{
 // Field
 
 // The freq of the HuffNode
-    private final int freq;
-    private final Element data;
+    private int freq;
+    private final Object data;
     
     
 // Nodes representing potential related Nodes    
@@ -23,33 +23,61 @@ public class HuffNode{
     /**
      * Constructor, takes an int, that is used as freq for Node
      * 
-     * @param freq
+     * @param newFreq
      */
-    public HuffNode(int freq){
-        this.freq = freq;
-        this.data = null;
+    HuffNode(){
+        freq = -1;
+        data = null;
+    }
+   
+    /**
+     * Constructor, takes an int, that is used as freq for Node
+     * 
+     * @param newFreq
+     */
+    HuffNode(int newFreq, Object newData){
+        freq = newFreq;
+        data = newData;
     }
     
     /**
-     * Constructor, takes an Elemet as input.
+     * Constructor for converting an element to a HuffNode
      * 
-     * @param data
+     * @param newFreq
      */
-    public HuffNode(Element data){
-        
-        
-        this.freq = data.getFreq();
-        this.data = data;
-        System.out.println("new HuffNode with frequence of: " + freq);
+    HuffNode(Element el){
+        freq = el.getFreq();
+        data = el.getData();
     }
-
+    
+    
+    /**
+     * Getter for the HuffNode's freq
+     * 
+     * @param newFreq
+     */
+    public void setFreq(int newFreq){
+        freq = newFreq;
+    }
+    
     /**
      * Getter for the HuffNode's freq
      * 
      * @return int freq of the HuffNode
      */
     public int getFreq(){
-        return this.freq;
+        int tmp = freq;
+        return tmp;
+    }
+  
+    /**
+     * Getter for the HuffNode's freq
+     * 
+     * @return int freq of the HuffNode
+     */
+    public Object getData(){
+        Object tmp = data;
+        return tmp;
     }
   
     
@@ -105,12 +133,6 @@ public class HuffNode{
      */
     public void setParent(HuffNode newNode){
         this.parent = newNode;
-    }
-    
-    public Element getEl()
-    {
-        Element tmp = data;
-        return tmp;
     }
     
 }
