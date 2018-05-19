@@ -24,32 +24,52 @@ public class Encode {
      */
     public Encode(String str)
     {
+        // Create list of frequencies, ordered by unicode number
         list = getFrq(str);
         
+        // Create a heap of the frequencies, and their unicode nubmer
+        PQHeap heap = createHeap(list);
+        
+        // Create the HuffTree Object
+        HuffTree huff = new HuffTree();
+        
+        // retrieve the Element containing the created Huffman Tree 
+        Element tmp = huff.HuffUnify(heap);
+        
+        // cast the Tree root from Object to HuffNode
+        HuffNode root = (HuffNode) tmp.getData();
+        
+        // Acquire the Array of bitcodes for each unicode character
+        String[] bitCode = huff.findCode(root);
+        
+        // Print the bitcodes out
+        int d = 0;
+        for(String x : bitCode)
+        {
+            System.out.println(d + ": " + x);
+            d++;
+        }
+                
+        // Print out the frequencies above 0:
+        printFreq(list);
         
         
+        
+    }
+    
+    private PQHeap createHeap(int[] list)
+    {
         PQHeap heap = new PQHeap(256);
         
+        
+        // Inserts unicode frequency into heap
         int i = 0;
         for(int x : list)
         {
-            heap.insert(new Element(x, new Object()));
+            heap.insert(new Element(x, i));
             i++;
         }
-        
-        HuffTree huff = new HuffTree();
-        Element tmp = huff.HuffUnify(heap);
-        System.out.println(tmp);
-        System.out.println(tmp.getFreq());
-        
-        
-        
-        
-        
-        printFreq(list);
-        // for loop extracting min from PQHeap every loop, adding to HuffTree
-        // Additions need a new Node obejct
-        
+        return heap;
     }
     
     /**Method that gives the frequency of the different strings in a file. 
@@ -113,6 +133,30 @@ public class Encode {
             i++;
         }
         System.out.println(Arrays.toString(arList.toArray()));
+    }
+    
+    public void writeOutput(String filePath, String[] bitcode)
+    {
+        try {
+            // String for testing, remember to take index 0 from arguments when finished
+            
+            
+            // Create frequencies
+            FileInputStream fin = new FileInputStream(filePath);
+            
+            while(fin.available() != 0)
+            { 
+                
+                
+            }
+        
+			
+			
+            return list;
+        } catch (IOException e) {
+            System.out.println(e);
+
+        }
     }
     
     // Remember to copy constructor into main to run with cmd

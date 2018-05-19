@@ -16,9 +16,9 @@ public class HuffNode{
     
     
 // Nodes representing potential related Nodes    
-    private HuffNode rchild = null;
-    private HuffNode lchild = null;
-    private HuffNode parent = null;
+    public HuffNode rchild = null;
+    public HuffNode lchild = null;
+    public HuffNode parent = null;
   
     /**
      * Constructor, takes an int, that is used as freq for Node
@@ -47,7 +47,20 @@ public class HuffNode{
      */
     HuffNode(Element el){
         freq = el.getFreq();
-        data = el.getData();
+        
+        if(el.getData().getClass() == HuffNode.class)
+        {
+            HuffNode tmp = (HuffNode) el.getData();
+            data = null;
+            rchild = tmp.getRchild();
+            lchild = tmp.getLchild();
+            parent = tmp.getParent();
+        }
+        else
+        {
+            data = el.getData();
+        }
+        
     }
     
     
@@ -111,7 +124,7 @@ public class HuffNode{
     /**
      * Setter for the HuffNode's right child
      * 
-     * @param newNode HuffNode, new right child of the HuffNode
+     * @param newNode HuffNode, new right child of the HuffNodeSystem.out.println();
      */
     public void setRchild(HuffNode newNode){
         this.rchild = newNode;
@@ -123,7 +136,7 @@ public class HuffNode{
      * @param newNode HuffNode, new left child of the HuffNode
      */
     public void setLchild(HuffNode newNode){
-        this.lchild = newNode;
+        this.lchild = newNode;        
     }
 
     /**
