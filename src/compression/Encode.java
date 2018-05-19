@@ -35,7 +35,7 @@ public class Encode {
         int i = 0;
         for(int x : list)
         {
-            heap.insert(new Element(x, new Object()));
+            heap.insert(new Element(x, i));
             i++;
         }
         

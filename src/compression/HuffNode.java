@@ -12,7 +12,7 @@ public class HuffNode{
 
 // The freq of the HuffNode
     private final int freq;
-    private final Element data;
+    private final int data;
     
     
 // Nodes representing potential related Nodes    
@@ -27,20 +27,21 @@ public class HuffNode{
      */
     public HuffNode(int freq){
         this.freq = freq;
-        this.data = null;
+        this.data = -1;
     }
     
     /**
      * Constructor, takes an int, that is used as freq for Node
      * 
+     * @param freq
      * @param data
      */
-    public HuffNode(Element data){
+    public HuffNode(int freq, int data){
         
         
-        this.freq = data.getFreq();
+        this.freq = freq;
         this.data = data;
-        System.out.println("new HuffNode with frequence of: " + freq);
+     //   System.out.println("new HuffNode with frequence of: " + freq);
     }
 
     /**
@@ -107,9 +108,9 @@ public class HuffNode{
         this.parent = newNode;
     }
     
-    public Element getEl()
+    public int getEl()
     {
-        Element tmp = data;
+        int tmp = data;
         return tmp;
     }
     

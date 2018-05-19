@@ -19,6 +19,7 @@ public class Element {
         
         
 	this.freq = i;
+       // System.out.println("new element with frq: " + freq);
 	this.data = o;
     }
 
