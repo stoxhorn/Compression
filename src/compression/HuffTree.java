@@ -60,26 +60,25 @@ public class HuffTree {
     
     
     
-    public String[] findCode(HuffNode rootNode)
+    public int[] findCode(HuffNode rootNode)
     {
         HuffNode root = rootNode;
-        String newBit = "";
         
-        String[] list = new String[256];
+        int[] list = new int[256];
         
         
         if(root != null)
         {
-            list = findCode(root.getLchild(), list, newBit + "0");
-            list = findCode(root.getRchild(), list, newBit + "1");
+            list = findCode(root.getLchild(), list, 10);
+            list = findCode(root.getRchild(), list, 11);
         }
         return list;
     }
     
-    private String[] findCode(HuffNode node, String[] oldList, String bitCode)
+    private int[] findCode(HuffNode node, int[] oldList, int bitCode)
     {
-        String newBit = bitCode;
-        String[] newList = oldList;
+        int newBit = bitCode;
+        int[] newList = oldList;
         
         // Base case missing here
         // Test if leaf
@@ -87,6 +86,10 @@ public class HuffTree {
         {
             int index = (Integer) node.getData();
             // add bitcode to lsit
+            String tmp = String.valueOf(newBit);
+            int l = tmp.length();
+            
+            newBit = (int) (newBit - (Math.pow(10, l-1)));
             newList[index] = newBit;
             
             // return the new list
@@ -94,14 +97,15 @@ public class HuffTree {
         }
         // general case both childs exist
         else {
+            newBit = newBit*10;
             // if node exists
             if(node != null)
             {
                 // go left with new bitcode and update list
-                newList = findCode(node.getLchild(), newList, newBit + "0");
+                newList = findCode(node.getLchild(), newList, newBit);
                 
                 // go right with new bitcode and update list
-                newList = findCode(node.getRchild(), newList, newBit + "1");
+                newList = findCode(node.getRchild(), newList, newBit+1);
             }
             return newList;
         }
