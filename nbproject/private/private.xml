@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1">
+        <file>
+            <url>src/compression/Test.java</url>
+            <bookmark id="1">
+                <name/>
+                <line>14</line>
+                <key/>
+            </bookmark>
+        </file>
+    </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Stoxhorn/Desktop/Vigtige%20filer/Uni/Projekter/CurrentProjects/Compression/src/compression/Compression.java</file>
-            <file>file:/C:/Users/Stoxhorn/Desktop/Vigtige%20filer/Uni/Projekter/CurrentProjects/Compression/src/compression/Test.java</file>
             <file>file:/C:/Users/Stoxhorn/Desktop/Vigtige%20filer/Uni/Projekter/CurrentProjects/Compression/src/compression/BitOutputStream.java</file>
+            <file>file:/C:/Users/Stoxhorn/Desktop/Vigtige%20filer/Uni/Projekter/CurrentProjects/Compression/src/Test.java</file>
             <file>file:/C:/Users/Stoxhorn/Desktop/Vigtige%20filer/Uni/Projekter/CurrentProjects/Compression/src/compression/Encode.java</file>
             <file>file:/C:/Users/Stoxhorn/Desktop/Vigtige%20filer/Uni/Projekter/CurrentProjects/Compression/src/compression/HuffTree.java</file>
-            <file>file:/C:/Users/Stoxhorn/Desktop/Vigtige%20filer/Uni/Projekter/CurrentProjects/Compression/src/compression/BitInputStream.java</file>
             <file>file:/C:/Users/Stoxhorn/Desktop/Vigtige%20filer/Uni/Projekter/CurrentProjects/Compression/src/compression/HuffNode.java</file>
+            <file>file:/C:/Users/Stoxhorn/Desktop/Vigtige%20filer/Uni/Projekter/CurrentProjects/Compression/src/compression/PQHeap.java</file>
         </group>
     </open-files>
 </project-private>

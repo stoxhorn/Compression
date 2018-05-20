@@ -155,8 +155,8 @@ public class Encode {
                     {
                         int nextByte = fin.read();
                         String outPut = bitCode[nextByte];
-                        
-                        bitStream.writeInt(Integer.parseInt(outPut));
+                        int tmp = Integer.parseInt(outPut);
+                        bitStream.writeInt(tmp);
                     }
 
                 
