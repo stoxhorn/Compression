@@ -58,8 +58,7 @@ public class Decode {
 
             try(FileOutputStream output = new FileOutputStream("C:\\Users\\Stoxhorn\\Desktop\\Vigtige filer\\Uni\\Projekter\\CurrentProjects\\Compression\\TestFinal.txt")) {
                 
-                
-                    while(charsLeft > -10)
+                    while(charsLeft > 0)
                     {
                         
                         int nextBit = inpStream.readBit();
@@ -92,6 +91,7 @@ public class Decode {
                         
                         charsLeft --;
 
+                        
                     }
                 inpStream.close();
                 output.close();
@@ -136,7 +136,7 @@ public class Decode {
             int x = 0;
             int[] list = new int[256];
             while((x = fin.read()) != -1){ 
-                
+
                 list[x]++;
                 //System.out.println(x);
                 // Tjek resultat med https://www.asciitable.com/

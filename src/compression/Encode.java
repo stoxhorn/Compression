@@ -150,7 +150,7 @@ public class Encode {
 
             try(FileOutputStream output = new FileOutputStream("C:\\Users\\Stoxhorn\\Desktop\\Vigtige filer\\Uni\\Projekter\\CurrentProjects\\Compression\\Test1.txt")) {
                 BitOutputStream bitStream = new BitOutputStream(output);
-                
+
                     while(fin.available() > 0)
                     {
                         int nextByte = fin.read();
@@ -161,7 +161,7 @@ public class Encode {
                             int tmp = Integer.parseInt(x);
                             bitStream.writeBit(tmp);
                         }
-                        
+
                     }
                     bitStream.close();
                     output.close();
