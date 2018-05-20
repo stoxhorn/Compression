@@ -12,7 +12,6 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import Compression.BitOutputStream;
-import java.math.BigInteger;
 
 /**
  *
@@ -44,7 +43,7 @@ public class Encode {
         HuffNode root = (HuffNode) tmp.getData();
         
         // Acquire the Array of bitcodes for each unicode character
-        int[] bitCode = huff.findCode(root);
+        String[] bitCode = huff.findCode(root);
         
         // Print the bitcodes out
         /*int d = 0;
@@ -139,7 +138,7 @@ public class Encode {
         System.out.println(Arrays.toString(arList.toArray()));
     }
     
-    public void writeOutput(String filePath, int[] bitCode)
+    public void writeOutput(String filePath, String[] bitCode)
     {
         try {
             // String for testing, remember to take index 0 from arguments when finished
@@ -155,8 +154,9 @@ public class Encode {
                     while(fin.available() != 0)
                     {
                         int nextByte = fin.read();
-                        int outPut = bitCode[nextByte];
-                        bitStream.writeInt(outPut);
+                        String outPut = bitCode[nextByte];
+                        int tmp = Integer.parseInt(outPut);
+                        bitStream.writeInt(tmp);
                     }
 
                 
