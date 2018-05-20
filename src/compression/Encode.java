@@ -151,29 +151,32 @@ public class Encode {
             try(FileOutputStream output = new FileOutputStream("C:\\Users\\Stoxhorn\\Desktop\\Vigtige filer\\Uni\\Projekter\\CurrentProjects\\Compression\\Test1.txt")) {
                 BitOutputStream bitStream = new BitOutputStream(output);
                 
-                    while(fin.available() != 0)
+                    while(fin.available() > 0)
                     {
                         int nextByte = fin.read();
                         String outPut = bitCode[nextByte];
-                        int tmp = Integer.parseInt(outPut);
-                        bitStream.writeInt(tmp);
+                        String[] out = outPut.split("");
+                        for(String x : out)
+                        {
+                            int tmp = Integer.parseInt(x);
+                            bitStream.writeBit(tmp);
+                        }
+                        
                     }
-
-                
-                
-                
-            }catch(NullPointerException e)
+                    bitStream.close();
+                    output.close();
+            }
+            catch(NullPointerException e)
             {
                 System.out.println(e);
             }
-            
-			
-			
         } catch (IOException e) {
             System.out.println(e);
 
         }
+        
     }
+    
     
     // Remember to copy constructor into main to run with cmd
     public static void main(String[] args) {

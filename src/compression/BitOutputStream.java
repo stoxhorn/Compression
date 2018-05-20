@@ -49,7 +49,6 @@ public final class BitOutputStream {
 
     // Writes an int to the stream.
     public void writeInt(int b) throws IOException {
-
 	int bitsWritten = 0;
 	while (bitsWritten < 32){
 	    writeBit(b >>> (31-bitsWritten) & 1);
