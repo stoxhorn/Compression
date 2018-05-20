@@ -6,9 +6,12 @@
 package compression;
 
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import Compression.BitOutputStream;
 
 /**
  *
@@ -43,17 +46,17 @@ public class Encode {
         String[] bitCode = huff.findCode(root);
         
         // Print the bitcodes out
-        int d = 0;
+        /*int d = 0;
         for(String x : bitCode)
         {
             System.out.println(d + ": " + x);
             d++;
-        }
+        }*/
                 
         // Print out the frequencies above 0:
         printFreq(list);
         
-        
+        writeOutput(str, bitCode);
         
     }
     
@@ -135,7 +138,7 @@ public class Encode {
         System.out.println(Arrays.toString(arList.toArray()));
     }
     
-    public void writeOutput(String filePath, String[] bitcode)
+    public void writeOutput(String filePath, String[] bitCode)
     {
         try {
             // String for testing, remember to take index 0 from arguments when finished
@@ -144,15 +147,28 @@ public class Encode {
             // Create frequencies
             FileInputStream fin = new FileInputStream(filePath);
             
-            while(fin.available() != 0)
-            { 
+
+            try(FileOutputStream output = new FileOutputStream("C:\\Users\\Stoxhorn\\Desktop\\Vigtige filer\\Uni\\Projekter\\CurrentProjects\\Compression\\Test1.txt")) {
+                BitOutputStream bitStream = new BitOutputStream(output);
+                
+                    while(fin.available() != 0)
+                    {
+                        int nextByte = fin.read();
+                        String outPut = bitCode[nextByte];
+                        
+                        bitStream.writeInt(Integer.parseInt(outPut));
+                    }
+
                 
                 
+                
+            }catch(NullPointerException e)
+            {
+                System.out.println(e);
             }
-        
+            
 			
 			
-            return list;
         } catch (IOException e) {
             System.out.println(e);
 
