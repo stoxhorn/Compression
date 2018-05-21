@@ -1,6 +1,3 @@
-
-package compression;
-
 /**
  * @author Rasmus Bartholin og Mads Mikael Keinicke
  * Rasmus: rbart17

@@ -1,14 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package compression;
-
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import Compression.BitOutputStream;
 
 /**
  *
@@ -94,6 +86,7 @@ public class Encode {
                         int tmp = Integer.parseInt(x);
                         
                         // write int as a bit to the bitstream
+                        System.out.print(tmp);
                         bitStream.writeBit(tmp);
                     }
                 }
