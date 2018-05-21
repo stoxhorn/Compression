@@ -23,23 +23,24 @@ public class Decode {
         
         PQHeap heap = createHeap(freqs);
         
+        //Create HuffTree
         HuffTree huff = new HuffTree();
         
+        //Run the method HuffUnify on the HuffTree and create a temporary Element. 
         Element tmp = huff.HuffUnify(heap);
         
+        //Create a new HuffNode, cast the Element tmp as a Huffnode and set its data as the Huffnodes frequency
         HuffNode root = (HuffNode) tmp.getData();
         
         String[] bitCode = huff.findCode(root);
         
-        // Need int to keep track of missing characters
+        // int to keep track of missing characters.
         int charsLeft = 0;
         
         for(int x : freqs)
         {
             charsLeft+= x;
         }
-        System.out.println(charsLeft);
-        
         
         decodeInput(str, bitCode, charsLeft, root);
         
@@ -88,11 +89,10 @@ public class Decode {
                         int outPut = (int) tmp.getData();
                         output.write(outPut);
                         
-                        
+                        // Subtract number of chars by one.
                         charsLeft --;
-
-                        
                     }
+                // Close the two streams.    
                 inpStream.close();
                 output.close();
                 
@@ -139,7 +139,7 @@ public class Decode {
 
                 list[x]++;
                 //System.out.println(x);
-                // Tjek resultat med https://www.asciitable.com/
+                // Check result with https://www.asciitable.com/
 
             }
         
@@ -152,6 +152,12 @@ public class Decode {
         }
         return null;
     }
+    
+    /**
+     * Creates a heap with 256 nodes, one for each possible unicode character. The frequency of the characters in the file is set as the keys of the heaps nodes. 
+     * @param list
+     * @return 
+     */
         private PQHeap createHeap(int[] list)
     {
         PQHeap heap = new PQHeap(256);

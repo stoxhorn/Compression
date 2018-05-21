@@ -59,7 +59,12 @@ public class Encode {
         writeOutput(str, bitCode);
         
     }
-    
+  
+    /**
+     * Creates a heap with 256 nodes, one for each possible unicode character. The frequency of the characters in the file is set as the keys of the heaps nodes. 
+     * @param list
+     * @return 
+     */
     private PQHeap createHeap(int[] list)
     {
         PQHeap heap = new PQHeap(256);
@@ -94,7 +99,7 @@ public class Encode {
                 
                 list[x]++;
                 //System.out.println(x);
-                // Tjek resultat med https://www.asciitable.com/
+                // Check result with https://www.asciitable.com/
 
             }
         
