@@ -1,3 +1,5 @@
+package compression;
+
 import Compression.BitOutputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;

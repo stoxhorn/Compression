@@ -8,9 +8,6 @@ package compression;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
 import Compression.BitOutputStream;
 
 /**
@@ -18,158 +15,92 @@ import Compression.BitOutputStream;
  * @author Stoxhorn
  */
 public class Encode {
-    int[] list;
-    String str;
     
-    /**
-     *
-     * @param str
-     */
-    public Encode(String str)
+    public static void main(String[] args)
     {
-        // Create list of frequencies, ordered by unicode number
-        list = getFrq(str);
-        
-        // Create a heap of the frequencies, and their unicode nubmer
-        PQHeap heap = createHeap(list);
-        
+        encode(args[0], args[1]);
+    }
+    
+    public static void encode(String inputFile, String compPath)
+    {
         // Create the HuffTree Object
-        HuffTree huff = new HuffTree();
+        HuffTree huff = new HuffTree();        
+        
+        // Create list of frequencies, ordered by unicode number
+        int[] freqs = HuffTree.getFrq(inputFile);
+        
+        // Create a heap of Elements with frquencies as key, and ASCII number as data
+        PQHeap heapFreq = huff.createHeap(freqs);
         
         // retrieve the Element containing the created Huffman Tree 
-        Element tmp = huff.HuffUnify(heap);
+        Element tmp = huff.HuffUnify(heapFreq);
         
-        // cast the Tree root from Object to HuffNode
+        // cast the Tree root from the Element to HuffNode
         HuffNode root = (HuffNode) tmp.getData();
         
-        // Acquire the Array of bitcodes for each unicode character
+        // Acquire the Array of bitcodes for each ASCII character
         String[] bitCode = huff.findCode(root);
         
-        // Print the bitcodes out
-        /*int d = 0;
-        for(String x : bitCode)
-        {
-            System.out.println(d + ": " + x);
-            d++;
-        }*/
-                
-        // Print out the frequencies above 0:
-        printFreq(list);
-        
-        writeOutput(str, bitCode);
+        // Write the proper output to the path for the compressed file
+        writeOutput(inputFile, compPath, bitCode, freqs);
         
     }
   
-    /**
-     * Creates a heap with 256 nodes, one for each possible unicode character. The frequency of the characters in the file is set as the keys of the heaps nodes. 
-     * @param list
-     * @return 
-     */
-    private PQHeap createHeap(int[] list)
-    {
-        PQHeap heap = new PQHeap(256);
-        
-        
-        // Inserts unicode frequency into heap
-        int i = 0;
-        for(int x : list)
-        {
-            heap.insert(new Element(x, i));
-            i++;
-        }
-        return heap;
-    }
-    
-    /**Method that gives the frequency of the different strings in a file. 
-     * 
-     * @param Str
-     * @return 
-     */
-    private static int[] getFrq(String Str)
-    {
-        try {
-            // String for testing, remember to take index 0 from arguments when finished
-            
-            
-            // Create frequencies
-            FileInputStream fin = new FileInputStream(Str);
-            int x = 0;
-            int[] list = new int[256];
-            while((x = fin.read()) != -1){ 
-                
-                list[x]++;
-                //System.out.println(x);
-                // Check result with https://www.asciitable.com/
-
-            }
-        
-			
-			
-            return list;
-        } catch (IOException e) {
-            System.out.println(e);
-
-        }
-        return null;
-    }
-    
     
     
     
     /**
-     * Prints out the frquency of each number that has been encountered
+     * The method that writes the Output, from the given parameters gotten in the main method
      * 
-     * @param list 
+     * @param filePath
+     * @param compPath
+     * @param bitCode
+     * @param freqs 
      */
-    private static void printFreq(int[] list)
+    public static void writeOutput(String filePath, String compPath, String[] bitCode, int[] freqs)
     {
-        ArrayList<String> arList = new ArrayList();
-        int i = 0;
-        String tmp;
-        for(int str : list)
-        {
-            tmp = String.valueOf(i);
-            if(str == 0)
-            {
-            }
-            else
-            {
-                tmp += ": ";
-                tmp += String.valueOf(str);
-                arList.add(tmp);
-            }
-            i++;
-        }
-        System.out.println(Arrays.toString(arList.toArray()));
-    }
-    
-    public void writeOutput(String filePath, String[] bitCode)
-    {
+        // Try statement in case file does not exist
         try {
-            // String for testing, remember to take index 0 from arguments when finished
-            
-            
-            // Create frequencies
+            // Creation of inputStream, from the given original file
             FileInputStream fin = new FileInputStream(filePath);
             
-
-            try(FileOutputStream output = new FileOutputStream("C:\\Users\\Stoxhorn\\Desktop\\Vigtige filer\\Uni\\Projekter\\CurrentProjects\\Compression\\Test1.txt")) {
+            // Try-with resources statement for the outputstream, in case path cannot be found
+            try(FileOutputStream output = new FileOutputStream(compPath)) {
+                
+                // creation of bitstream
                 BitOutputStream bitStream = new BitOutputStream(output);
+                
+                // Write the frequencies of the ASCII characters, for the usage of decoding
+                for(int x : freqs)
+                {
+                    bitStream.writeInt(x);
+                }
 
-                    while(fin.available() > 0)
+                // loop for writing ASCII characters as bits, using our bitCodes
+                while(fin.available() > 0)
+                {
+                    // getting the next byte to convert
+                    int nextByte = fin.read();
+                    
+                    // Get the bitcode, corresponding to the equivalent ASCII btyecode
+                    String bits = bitCode[nextByte];
+                    
+                    // Convert the string to an array of strings, each indice is one bit
+                    String[] bitArray = bits.split("");
+                    
+                    for(String x : bitArray)
                     {
-                        int nextByte = fin.read();
-                        String outPut = bitCode[nextByte];
-                        String[] out = outPut.split("");
-                        for(String x : out)
-                        {
-                            int tmp = Integer.parseInt(x);
-                            bitStream.writeBit(tmp);
-                        }
-
+                        // convert String of bit to an int
+                        int tmp = Integer.parseInt(x);
+                        
+                        // write int as a bit to the bitstream
+                        bitStream.writeBit(tmp);
                     }
-                    bitStream.close();
-                    output.close();
+                }
+                
+                // Close the streams, as we are done using them
+                bitStream.close();
+                output.close();
             }
             catch(NullPointerException e)
             {
@@ -177,17 +108,9 @@ public class Encode {
             }
         } catch (IOException e) {
             System.out.println(e);
-
         }
-        
     }
     
-    
-    // Remember to copy constructor into main to run with cmd
-    public static void main(String[] args) {
-        
-        
-    }
 
 }
 
